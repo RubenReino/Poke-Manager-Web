@@ -16,7 +16,17 @@ namespace PokeManagerWeb
         {
             PokemonNegocio pokemons = new PokemonNegocio();
             listaPoke = pokemons.listarPokeSP();
-            
+            if (!IsPostBack)
+            {
+
+            repPokemon.DataSource = listaPoke;
+            repPokemon.DataBind();
+            }
+        }
+
+        protected void btnDetalles_Click(object sender, EventArgs e)
+        {
+            string idSeleccionado = ((Button)sender).CommandArgument;
         }
     }
 }

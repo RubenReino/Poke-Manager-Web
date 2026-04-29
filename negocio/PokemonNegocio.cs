@@ -27,6 +27,10 @@ namespace negocio
                     auxiliar.Nombre = lectura.Lector["Nombre"].ToString();
                     auxiliar.Descripcion = lectura.Lector["Descripcion"].ToString();
                     auxiliar.UrlImagen = lectura.Lector["UrlImagen"].ToString();
+                    auxiliar.Tipo = new Elemento();
+                    auxiliar.Tipo.Descripcion = lectura.Lector["Tipo"].ToString();
+                    auxiliar.Debilidad = new Elemento();
+                    auxiliar.Debilidad.Descripcion = lectura.Lector["Debilidad"].ToString();
 
                     listaPoke.Add(auxiliar);
                 }

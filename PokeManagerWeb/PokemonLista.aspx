@@ -7,6 +7,8 @@
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Imagen" DataField="UrlImagen" />
+            <asp:BoundField HeaderText="Tipo" DataField="Tipo.Descripcion" />
+            <asp:BoundField HeaderText="Tipo" DataField="Debilidad.Descripcion" />
         </Columns>
     </asp:GridView>
 </asp:Content>
