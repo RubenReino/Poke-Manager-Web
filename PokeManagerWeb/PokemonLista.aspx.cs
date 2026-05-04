@@ -17,5 +17,12 @@ namespace PokeManagerWeb
             dgvListaPoke.DataSource = listaPoke.listarPokeSP();
             dgvListaPoke.DataBind();
         }
+
+        protected void dgvListaPoke_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = dgvListaPoke.SelectedDataKey.Value.ToString();
+
+            Response.Redirect("AgregarPoke.aspx?id="+id);
+        }
     }
 }
