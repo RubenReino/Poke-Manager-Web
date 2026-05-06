@@ -24,5 +24,11 @@ namespace PokeManagerWeb
 
             Response.Redirect("AgregarPoke.aspx?id="+id);
         }
+
+        protected void dgvListaPoke_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvListaPoke.PageIndex = e.NewPageIndex;
+            dgvListaPoke.DataBind();
+        }
     }
 }

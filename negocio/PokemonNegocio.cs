@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using dominio;
 
+
 namespace negocio
 {
     public class PokemonNegocio
@@ -13,6 +14,7 @@ namespace negocio
         {
             List<Pokemon> listaPoke = new List<Pokemon>();
             AccesoDatos lectura = new AccesoDatos();
+            
             try
             {
                 lectura.SetearProcedure("storedListar");
@@ -27,10 +29,14 @@ namespace negocio
                     auxiliar.Nombre = lectura.Lector["Nombre"].ToString();
                     auxiliar.Descripcion = lectura.Lector["Descripcion"].ToString();
                     auxiliar.UrlImagen = lectura.Lector["UrlImagen"].ToString();
-                    auxiliar.Tipo = new Elemento();
+                    auxiliar.Tipo = new Tipo();
+                    auxiliar.Tipo.Id = (int)lectura.Lector["idTipo"];
                     auxiliar.Tipo.Descripcion = lectura.Lector["Tipo"].ToString();
-                    auxiliar.Debilidad = new Elemento();
+                    auxiliar.Tipo.UrlImagen = lectura.Lector["TipoI"].ToString();
+                    auxiliar.Debilidad = new Tipo();
+                    auxiliar.Debilidad.Id = (int)lectura.Lector["idDebilidad"];
                     auxiliar.Debilidad.Descripcion = lectura.Lector["Debilidad"].ToString();
+                    auxiliar.Debilidad.UrlImagen = lectura.Lector["DebilidadI"].ToString();
 
                     listaPoke.Add(auxiliar);
                 }
