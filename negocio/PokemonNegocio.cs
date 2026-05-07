@@ -12,6 +12,7 @@ namespace negocio
     {
         public List<Pokemon> listarPokeSP()
         {
+  
             List<Pokemon> listaPoke = new List<Pokemon>();
             AccesoDatos lectura = new AccesoDatos();
             
@@ -46,8 +47,95 @@ namespace negocio
             {
 
                 throw ex;
+
+            }
+            finally
+            {
+                lectura.CerrarConexion();
             }
 
         }
+        public void agregarPoke(Pokemon nuevoPoke)
+        {
+
+            AccesoDatos agregar = new AccesoDatos();
+            
+            try
+            {
+
+                agregar.SetearProcedure("storedAgregar");
+                agregar.SetearParametro("@numero",nuevoPoke.Numero);
+                agregar.SetearParametro("@nombre",nuevoPoke.Nombre);
+                agregar.SetearParametro("@descripcion",nuevoPoke.Descripcion);
+                agregar.SetearParametro("@urlImagen",nuevoPoke.UrlImagen);
+                agregar.SetearParametro("@tipoId",nuevoPoke.Tipo.Id);
+                agregar.SetearParametro("@debilidadId",nuevoPoke.Debilidad.Id);
+
+                agregar.AbrirConexion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+
+            }finally
+            {
+                agregar.CerrarConexion();
+            }
+
+        }
+        public void EditarPoke(Pokemon edicionPoke)
+        {
+
+            AccesoDatos editar = new AccesoDatos();
+            
+            try
+            {
+
+                editar.SetearProcedure("storedActualizar");
+                editar.SetearParametro("@id",edicionPoke.Id);
+                editar.SetearParametro("@numero",edicionPoke.Numero);
+                editar.SetearParametro("@nombre",edicionPoke.Nombre);
+                editar.SetearParametro("@descripcion",edicionPoke.Descripcion);
+                editar.SetearParametro("@urlImagen",edicionPoke.UrlImagen);
+                editar.SetearParametro("@tipoId",edicionPoke.Tipo.Id);
+                editar.SetearParametro("@debilidadId",edicionPoke.Debilidad.Id);
+
+                editar.AbrirConexion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+
+            }finally
+            {
+                editar.CerrarConexion();
+            }
+
+        }
+
+        public void EliminarPokeSP(int id)
+        {
+            AccesoDatos eliminar = new AccesoDatos();
+            try
+            {
+                eliminar.SetearProcedure("storedEliminar"); 
+                eliminar.SetearParametro("@id",id);
+
+                eliminar.AbrirConexion();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                eliminar.CerrarConexion();
+            }
+        }
+
     }
 }

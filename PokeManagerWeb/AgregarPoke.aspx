@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
-<!-- Contenedor principal de la vista para registrar o editar un Pokémon -->
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <h2>POKEMON</h2>
@@ -74,9 +74,8 @@
                     <asp:Label AssociatedControlID="imgUrlDebilidad" class="form-label" runat="server">Debilidad:</asp:Label>
                     <asp:Image ID="imgUrlDebilidad" runat="server" Width="100px" />
 
-                </ContentTemplate>
-
                 <!-- Triggers que conectan los dropdowns con este panel para actualización parcial -->
+                </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="ddlTipo" EventName="SelectedIndexChanged" />
                     <asp:AsyncPostBackTrigger ControlID="ddlDebilidad" EventName="SelectedIndexChanged" />
@@ -87,9 +86,9 @@
     </div>
 
     <!-- Botones de acción: guardar, modificar o eliminar Pokémon -->
-    <asp:Button ID="btnAgregar" Text="Guardar" CssClass="btn btn-secondary" runat="server" />
-    <asp:Button ID="btnModificar" Text="Modificar" Visible="false" CssClass="btn btn-secondary" runat="server" />
-    <asp:Button ID="btnEliminar" Text="Eliminar" Visible="false" CssClass="btn btn-secondary" runat="server" />
+    <asp:Button ID="btnAgregar" Text="Guardar" CssClass="btn btn-secondary" OnClick="btnAgregar_Click" runat="server" />
+    <asp:Button ID="btnModificar" Text="Modificar" Visible="false" CssClass="btn btn-secondary" OnClick="btnModificar_Click" runat="server" />
+    <asp:Button ID="btnEliminar" Text="Eliminar" Visible="false" CssClass="btn btn-secondary" OnClick="btnEliminar_Click" runat="server" />
 
     <a href="PokemonLista.aspx" class="btn btn-secondary">Cancelar</a>
 </asp:Content>

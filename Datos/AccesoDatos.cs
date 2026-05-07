@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,11 +22,6 @@ namespace negocio
         }
 
         public SqlDataReader Lector { get { return lector; } }
-        public void SetearProcedure(string consulta)
-        {
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.CommandText = consulta;
-        }
 
         public void EjecutarLectura()
         {
@@ -38,6 +35,56 @@ namespace negocio
             {
 
                 throw ex;
+            }
+        }
+        public void SetearProcedure(string consulta)
+        {
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandText = consulta;
+        }
+
+        public void SetearParametro(string parametro, object valor)
+        {
+            comando.Parameters.AddWithValue(parametro, valor);
+        }
+
+        public void AbrirConexion()
+        {
+            comando.Connection = conexion;
+
+            try
+            {
+
+                conexion.Open();
+                comando.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public void CerrarConexion()
+        {
+
+            try
+            {
+                if (lector != null)
+                {
+                    lector.Close();
+                }
+
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
     }
