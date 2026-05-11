@@ -16,6 +16,10 @@
 
 
             <div class="mb-3">
+                <asp:Label AssociatedControlID="txtId" class="form-label" runat="server">ID</asp:Label>
+                <asp:TextBox ID="txtId" CssClass="form-control" Enabled="false" runat="server" />
+            </div>
+            <div class="mb-3">
                 <asp:Label AssociatedControlID="txtNumero" class="form-label" runat="server">Numero</asp:Label>
                 <asp:TextBox ID="txtNumero" CssClass="form-control" runat="server" />
             </div>
@@ -74,7 +78,7 @@
                     <asp:Label AssociatedControlID="imgUrlDebilidad" class="form-label" runat="server">Debilidad:</asp:Label>
                     <asp:Image ID="imgUrlDebilidad" runat="server" Width="100px" />
 
-                <!-- Triggers que conectan los dropdowns con este panel para actualización parcial -->
+                    <!-- Triggers que conectan los dropdowns con este panel para actualización parcial -->
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="ddlTipo" EventName="SelectedIndexChanged" />
@@ -85,16 +89,18 @@
         </div>
     </div>
 
-    <!-- Botones de acción: guardar/modificar o eliminar Pokémon -->
-    <asp:Button ID="btnAgregar" Text="Guardar" CssClass="btn btn-secondary" OnClick="btnAgregar_Click" runat="server" />
-    <asp:Button ID="btnEliminar" Text="Eliminar" Visible="false" CssClass="btn btn-secondary" OnClick="btnEliminar_Click" runat="server" />
+    <!-- Botones de acción: crear, modificar, inactivar, eliminar fisico y eliminar lógico -->
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <asp:Button ID="btnAgregar" Text="Guardar" CssClass="btn btn-primary" OnClick="btnAgregar_Click" runat="server" />
+            <asp:Button ID="btnInactivar" Text="Inactivar" Visible="false" CssClass="btn btn-outline-warning" OnClick="btnInactivar_Click" runat="server" />
+            <asp:Button ID="btnEliminar" Text="Eliminar" Visible="false" CssClass="btn btn-outline-danger" OnClick="btnEliminar_Click" runat="server" />
+            <a href="PokemonLista.aspx" class="btn btn-secondary">Cancelar</a>
+            <div class="d-block mt-3">
+                <asp:CheckBox Text="Confirmar Eliminación" ID="chkEliminar" Visible="false" runat="server" />
+                <asp:Button ID="btnConfirmarBorrar" Text="Eliminar" Visible="false" CssClass="btn btn-danger" OnClick="btnConfirmarBorrar_Click" runat="server" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
-
-    <!-- Botones de acción: confirmar eliminacion -->
-    <a href="PokemonLista.aspx" class="btn btn-secondary">Cancelar</a>
-    <div class="d-block mt-3">   
-
-    <asp:CheckBox Text="Confirmar Eliminación" ID="chkEliminar" Visible="false" runat="server" />
-    <asp:Button ID="btnConfirmarBorrar" Text="Eliminar" Visible="false" CssClass="btn btn-danger" OnClick="btnConfirmarBorrar_Click" runat="server" />
-    </div>
 </asp:Content>

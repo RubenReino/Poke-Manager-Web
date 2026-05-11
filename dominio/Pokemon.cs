@@ -16,5 +16,6 @@ namespace dominio
 
         public Tipo Tipo { get; set; }
         public Tipo Debilidad { get; set; }
+        public bool Activo { get; set; }
     }
 }

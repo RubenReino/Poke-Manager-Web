@@ -62,7 +62,7 @@ namespace negocio
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
         public void CerrarConexion()
@@ -84,7 +84,7 @@ namespace negocio
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
     }

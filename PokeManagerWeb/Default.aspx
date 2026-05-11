@@ -15,7 +15,7 @@
         <div class="col">
 
             <div class="card">
-                <img src="<%#Eval("UrlImagen")%>" class="card-img-top" alt="Loading...">
+                <img src="<%#Eval("UrlImagen")%>" class="card-img-top" style="height:350px" alt="Loading...">
                 <div class="card-body">
                     <h5 class="card-title"><%#Eval("Nombre")%></h5>
                     <a href="Detalles.aspx" class="btn btn-primary">Detalles</a>

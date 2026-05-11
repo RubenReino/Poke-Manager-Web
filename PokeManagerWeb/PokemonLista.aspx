@@ -13,6 +13,7 @@
             <asp:BoundField HeaderText="Imagen" DataField="UrlImagen" />
             <asp:BoundField HeaderText="Tipo" DataField="Tipo.Descripcion" />
             <asp:BoundField HeaderText="Tipo" DataField="Debilidad.Descripcion" />
+            <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
             <asp:CommandField headerText="Acción" ShowSelectButton="true" SelectText="✏️" ControlStyle-CssClass="no-decoration"/>
         </Columns>
     </asp:GridView>
