@@ -85,10 +85,16 @@
         </div>
     </div>
 
-    <!-- Botones de acción: guardar, modificar o eliminar Pokémon -->
+    <!-- Botones de acción: guardar/modificar o eliminar Pokémon -->
     <asp:Button ID="btnAgregar" Text="Guardar" CssClass="btn btn-secondary" OnClick="btnAgregar_Click" runat="server" />
-    <asp:Button ID="btnModificar" Text="Modificar" Visible="false" CssClass="btn btn-secondary" OnClick="btnModificar_Click" runat="server" />
     <asp:Button ID="btnEliminar" Text="Eliminar" Visible="false" CssClass="btn btn-secondary" OnClick="btnEliminar_Click" runat="server" />
 
+
+    <!-- Botones de acción: confirmar eliminacion -->
     <a href="PokemonLista.aspx" class="btn btn-secondary">Cancelar</a>
+    <div class="d-block mt-3">   
+
+    <asp:CheckBox Text="Confirmar Eliminación" ID="chkEliminar" Visible="false" runat="server" />
+    <asp:Button ID="btnConfirmarBorrar" Text="Eliminar" Visible="false" CssClass="btn btn-danger" OnClick="btnConfirmarBorrar_Click" runat="server" />
+    </div>
 </asp:Content>

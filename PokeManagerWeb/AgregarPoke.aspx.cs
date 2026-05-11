@@ -33,11 +33,13 @@ namespace PokeManagerWeb
 
                     imgUrlPoke.ImageUrl = "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg";
 
-                    if (Request.QueryString["id"] != null)
+                    string id = Request.QueryString["id"];
+                    if (id != null)
                     {
-                        int id = int.Parse(Request.QueryString["id"].ToString());
+
+
                         PokemonNegocio pokemonSelect = new PokemonNegocio();
-                        Pokemon pokeTemporal = pokemonSelect.listarPokeSP().Find(x => x.Id == id);
+                        Pokemon pokeTemporal = pokemonSelect.listarPokeSP().Find(x => x.Id == int.Parse(id));
                         txtNumero.Text = pokeTemporal.Numero.ToString();
                         txtNombre.Text = pokeTemporal.Nombre;
                         txtDescripcion.Text = pokeTemporal.Descripcion;
@@ -50,8 +52,7 @@ namespace PokeManagerWeb
                         ddlTipo.SelectedValue = pokeTemporal.Tipo.Id.ToString();
                         ddlDebilidad.SelectedValue = pokeTemporal.Debilidad.Id.ToString();
 
-                        btnAgregar.Visible = false;
-                        btnModificar.Visible = true;
+                        btnAgregar.Text = "Modificar";
                         btnEliminar.Visible = true;
                     }
 
@@ -70,11 +71,14 @@ namespace PokeManagerWeb
             try
             {
 
-                imgUrlPoke.ImageUrl = txtUrlImagen.Text;
-                if (imgUrlPoke.ImageUrl == "")
+                if (txtUrlImagen.Text != "")
+                {
+                    imgUrlPoke.ImageUrl = txtUrlImagen.Text;
+
+                }
+                else
                 {
                     imgUrlPoke.ImageUrl = "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg";
-
                 }
             }
             catch (Exception ex)
@@ -130,8 +134,10 @@ namespace PokeManagerWeb
         {
             try
             {
-            Pokemon nuevoPoke = new Pokemon();
-            PokemonNegocio datosPoke = new PokemonNegocio();
+
+
+                Pokemon nuevoPoke = new Pokemon();
+                PokemonNegocio datosPoke = new PokemonNegocio();
 
                 nuevoPoke.Numero = int.Parse(txtNumero.Text);
                 nuevoPoke.Nombre = txtNombre.Text;
@@ -142,39 +148,18 @@ namespace PokeManagerWeb
                 nuevoPoke.Debilidad = new Tipo();
                 nuevoPoke.Debilidad.Id = int.Parse(ddlDebilidad.SelectedValue);
 
+                string id = Request.QueryString["id"];
+                if (id != null)
+                {
+                    nuevoPoke.Id = int.Parse(id);
+                    datosPoke.EditarPoke(nuevoPoke);
+                }
+                else { 
                 datosPoke.agregarPoke(nuevoPoke);
+                }
 
-                Response.Redirect("PokemonLista.aspx");
-            }
-            catch (Exception ex)
-            {
+                Response.Redirect("PokemonLista.aspx",false);
 
-                throw;
-            }
-        }
-
-        protected void btnModificar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int id = int.Parse(Request.QueryString["id"]);
-                Pokemon editarPoke = new Pokemon();
-                PokemonNegocio datosPoke = new PokemonNegocio();
-
-                editarPoke = datosPoke.listarPokeSP().Find(x => x.Id == id);
-
-                editarPoke.Numero = int.Parse(txtNumero.Text);
-                editarPoke.Nombre = txtNombre.Text;
-                editarPoke.Descripcion = txtDescripcion.Text;
-                editarPoke.UrlImagen = txtUrlImagen.Text;
-                editarPoke.Tipo = new Tipo();
-                editarPoke.Tipo.Id = int.Parse(ddlTipo.SelectedValue);
-                editarPoke.Debilidad = new Tipo();
-                editarPoke.Debilidad.Id = int.Parse(ddlDebilidad.SelectedValue);
-
-                datosPoke.EditarPoke(editarPoke);
-
-                Response.Redirect("PokemonLista.aspx");
 
             }
             catch (Exception ex)
@@ -188,18 +173,34 @@ namespace PokeManagerWeb
         {
             try
             {
-                int id = int.Parse(Request.QueryString["id"]);
-                PokemonNegocio eliminarPoke = new PokemonNegocio();
-
-                eliminarPoke.EliminarPokeSP(id);
-
-                Response.Redirect("PokemonLista.aspx");
-
+                btnConfirmarBorrar.Visible = true;
+                chkEliminar.Visible = true;
             }
             catch (Exception ex)
             {
 
                 throw;
+            }
+        }
+
+        protected void btnConfirmarBorrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkEliminar.Checked)
+                {
+                    int id = int.Parse(Request.QueryString["id"]);
+                    PokemonNegocio eliminarPoke = new PokemonNegocio();
+
+                    eliminarPoke.EliminarPokeSP(id);
+
+                    Response.Redirect("PokemonLista.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }
