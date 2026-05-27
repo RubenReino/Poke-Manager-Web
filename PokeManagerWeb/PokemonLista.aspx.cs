@@ -14,7 +14,8 @@ namespace PokeManagerWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             PokemonNegocio listaPoke = new PokemonNegocio();
-            dgvListaPoke.DataSource = listaPoke.listarPokeSP();
+            Session.Add("listaPokemon", listaPoke.listarPokeSP());
+            dgvListaPoke.DataSource = Session["listaPokemon"];
             dgvListaPoke.DataBind();
         }
 
@@ -28,6 +29,14 @@ namespace PokeManagerWeb
         protected void dgvListaPoke_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvListaPoke.PageIndex = e.NewPageIndex;
+            dgvListaPoke.DataBind();
+        }
+
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Pokemon> lista = (List<Pokemon>)Session["listaPokemon"];
+            List<Pokemon> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            dgvListaPoke.DataSource = listaFiltrada;
             dgvListaPoke.DataBind();
         }
     }
