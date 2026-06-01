@@ -11,11 +11,13 @@ namespace PokeManagerWeb
 {
     public partial class PokemonLista : System.Web.UI.Page
     {
+        public bool FiltroA { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             PokemonNegocio listaPoke = new PokemonNegocio();
             Session.Add("listaPokemon", listaPoke.listarPokeSP());
             dgvListaPoke.DataSource = Session["listaPokemon"];
+            lblNoDisponible.Visible = false;
             dgvListaPoke.DataBind();
         }
 
@@ -34,10 +36,39 @@ namespace PokeManagerWeb
 
         protected void txtFiltro_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
             List<Pokemon> lista = (List<Pokemon>)Session["listaPokemon"];
             List<Pokemon> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
             dgvListaPoke.DataSource = listaFiltrada;
+                if (listaFiltrada.Count == 0)
+                {
+                    lblNoDisponible.Visible = true;
+                }
+                else
+                {
+                    lblNoDisponible.Visible = false;
+                }
             dgvListaPoke.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error",ex);
+            }
+        }
+
+        protected void chkFiltroA_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                FiltroA = chkFiltroA.Checked;
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex);
+            }
         }
     }
 }
