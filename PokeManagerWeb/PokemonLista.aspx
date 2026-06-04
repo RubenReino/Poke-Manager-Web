@@ -23,8 +23,8 @@
 
                 <div class="col-3">
                     <div class="mb-3">
-                        <asp:Label ID="lblCampo" AssociatedControlID="ddlCampo" Text="Filtro" CssClass="form-label" runat="server" />
-                        <asp:DropDownList ID="ddlCampo" runat="server">
+                        <asp:Label ID="lblCampo" AssociatedControlID="ddlCampo" Text="Campo" CssClass="form-label" runat="server" />
+                        <asp:DropDownList ID="ddlCampo" CssClass="form-control" runat="server">
                             <asp:ListItem Text="Nombre" />
                             <asp:ListItem Text="Tipo" />
                             <asp:ListItem Text="Número" />
@@ -34,8 +34,8 @@
 
                 <div class="col-3">
                     <div class="mb-3">
-                        <asp:Label ID="lblCriterio" AssociatedControlID="ddlCriterio" Text="Filtro" CssClass="form-label" runat="server" />
-                        <asp:DropDownList ID="ddlCriterio" runat="server">
+                        <asp:Label ID="lblCriterio" AssociatedControlID="ddlCriterio" Text="Criterio" CssClass="form-label" runat="server" />
+                        <asp:DropDownList ID="ddlCriterio" CssClass="form-control" runat="server">
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -43,22 +43,22 @@
                 <div class="col-3">
                     <div class="mb-3">
                         <asp:Label ID="lblFiltroA" AssociatedControlID="txtFiltroA" Text="Filtro" CssClass="form-label" runat="server" />
-                        <asp:TextBox ID="txtFiltroA" runat="server" />
+                        <asp:TextBox ID="txtFiltroA" CssClass="form-control" runat="server" />
                     </div>
                 </div>
 
                 <div class="col-3">
                     <div class="mb-3">
-                        <asp:Label ID="lblEstado" AssociatedControlID="ddlEstado" Text="Filtro" CssClass="form-label" runat="server" />
-                        <asp:DropDownList ID="ddlEstado" runat="server">
+                        <asp:Label ID="lblEstado" AssociatedControlID="ddlEstado" Text="Estado" CssClass="form-label" runat="server" />
+                        <asp:DropDownList ID="ddlEstado" CssClass="form-control" runat="server">
                             <asp:ListItem Text="Todos" />
                             <asp:ListItem Text="Activo" />
                             <asp:ListItem Text="Inactivo" />
                         </asp:DropDownList>
                     </div>
                 </div>
-                <%} %>
             </div>
+            <%} %>
             <asp:GridView ID="dgvListaPoke"
                 DataKeyNames="Id" OnSelectedIndexChanged="dgvListaPoke_SelectedIndexChanged"
                 CssClass="table table-dark" AutoGenerateColumns="false"

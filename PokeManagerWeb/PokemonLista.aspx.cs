@@ -25,7 +25,7 @@ namespace PokeManagerWeb
         {
             string id = dgvListaPoke.SelectedDataKey.Value.ToString();
 
-            Response.Redirect("AgregarPoke.aspx?id="+id);
+            Response.Redirect("AgregarPoke.aspx?id=" + id);
         }
 
         protected void dgvListaPoke_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -38,9 +38,9 @@ namespace PokeManagerWeb
         {
             try
             {
-            List<Pokemon> lista = (List<Pokemon>)Session["listaPokemon"];
-            List<Pokemon> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
-            dgvListaPoke.DataSource = listaFiltrada;
+                List<Pokemon> lista = (List<Pokemon>)Session["listaPokemon"];
+                List<Pokemon> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+                dgvListaPoke.DataSource = listaFiltrada;
                 if (listaFiltrada.Count == 0)
                 {
                     lblNoDisponible.Visible = true;
@@ -49,12 +49,12 @@ namespace PokeManagerWeb
                 {
                     lblNoDisponible.Visible = false;
                 }
-            dgvListaPoke.DataBind();
+                dgvListaPoke.DataBind();
             }
             catch (Exception ex)
             {
 
-                Session.Add("Error",ex);
+                Session.Add("Error", ex);
             }
         }
 
@@ -63,6 +63,14 @@ namespace PokeManagerWeb
             try
             {
                 FiltroA = chkFiltroA.Checked;
+                if (FiltroA)
+                {
+                    txtFiltro.Enabled = false;
+                }
+                else
+                {
+                    txtFiltro.Enabled = true;
+                }
             }
             catch (Exception ex)
             {
